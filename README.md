@@ -1,6 +1,7 @@
 # eks-infrastructure-with-terraform
 
 Project development stages:
+
 •	Create terraform scripts to deploy AWS EKS Cluster:
 
 1-	Create AWS VPC using Terraform
@@ -12,6 +13,7 @@ Project development stages:
 4-	Deploy Cluster Autoscaler to automatically scale the EKS cluster.
 
 Notes:
+
 To create AWS VPC, we use terraform-aws-module . Let's call it vpc.tf and provide a CIDR range. For EKS, you need at least two availability zones. Let's use us-east-1a and 1b. then deploy our Kubernetes workers in the private subnets with a default route to NAT Gateway. However, if you're going to expose your application to the internet, you would need public subnets with a default route to the Internet Gateway.
 To run the workload on your Kubernetes cluster, you need to provision instance groups. (Options: eks-managed nodes/ self-managed groups/Fargate). I used in this project managed node groups which automate the provisioning and lifecycle management of nodes (Amazon EC2 instances) for EKS.
 Amazon eks tags managed node group resources so that they are configured to use the k8s cluster Autoscaler.
@@ -23,6 +25,7 @@ To grant additional IAM principals the ability to interact with your cluster , e
 Or by:
 -	 Add IAM role to EKS cluster: grant access to IAM role just once by using aws configMap and then you can simply allow users outside of EKS to assume that role. 
 ![architecture](Architecture/EKS-terraform.PNG)
+
 Technologies used in this project:
 -	Cloud provider: AWS
 -	Infrastructure as a code: Terraform
